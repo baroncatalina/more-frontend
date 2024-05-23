@@ -16,3 +16,11 @@ window.addEventListener('mousemove', (event) => {
     const newPosition = -clampedOffset * window.innerWidth + 'px';
     imageSet.style.transform = `translateX(${newPosition})`;
 });
+
+const images = document.querySelectorAll('.images');
+const popUpBox = document.querySelector('.popup-box');
+
+
+// for (i = 0; i < images.length; i++) {
+//     images[i].addEventListener('click', console.log('hello'))
+// };

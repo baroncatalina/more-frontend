@@ -4,6 +4,13 @@ body {
     width: 200vw;
 }
 
+
+
+.imageset-container {
+    height: 100vh;
+    align-content: center;
+}
+
 .image-set {
     display: flex;
     flex-wrap: wrap;
@@ -33,4 +40,33 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+
+.popup-box {
+    display: block;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 100px;
+    border: 1px #0000007c solid;
+    border-radius: 10px;
+    z-index: 9999;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(3px);
+    z-index: 5;
+}
+
+.hidden {
+    display: none;
 }
