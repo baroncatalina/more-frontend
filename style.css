@@ -1,72 +1,41 @@
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    width: 200vw;
-}
-
-
-
-.imageset-container {
     height: 100vh;
-    align-content: center;
-}
-
-.image-set {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    padding: 20px;
-}
-
-.image-container {
-    width: 200px;
-    /* Adjust the width as needed */
-    height: 300px;
-    /* Adjust the height as needed */
+    width: 100vw;
+    background-color: black;
+    margin: 0rem;
     overflow: hidden;
-    border: 2px solid #ccc;
-    /* Adjust the border style as needed */
-    border-radius: 10px;
-    /* Optional: rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    /* Optional: shadow effect */
+}
+
+#image-track {
     display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.image-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-
-.popup-box {
-    display: block;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #fff;
-    padding: 100px;
-    border: 1px #0000007c solid;
-    border-radius: 10px;
-    z-index: 9999;
-}
-
-.overlay {
+    gap: 2rem;
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 200vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(3px);
-    z-index: 5;
+    left: 50%;
+    top: 50%;
+    transform: translate(0%, -50%);
+    user-select: none;
+    /* -- Prevent image highlighting -- */
 }
 
-.hidden {
-    display: none;
+.image-box {
+    display: flex;
+    gap: 4vmin;
+    width: 40vmin;
+    height: 56vmin;
+}
+
+.image-box span {
+    display: flex;
+    color: white;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(0%, -50%);
+}
+
+.image-box>.image {
+    width: 40vmin;
+    height: 56vmin;
+    object-fit: cover;
+    object-position: 100% center;
 }

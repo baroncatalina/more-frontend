@@ -1,26 +1,45 @@
-window.addEventListener('mousemove', (event) => {
-    const imageSet = document.querySelector('.image-set');
-    const mouseX = event.clientX; // Get mouse X position
+const track = document.getElementById("image-track");
 
-    // Calculate offset based on mouse position relative to window
-    const offset = mouseX / window.innerWidth; // 0 to 1
+const handleOnDown = e => track.dataset.mouseDownAt = e.clientX;
 
-    // Adjust for potential imageSet width exceeding window width
-    const imageSetWidth = imageSet.offsetWidth;
-    const maxOffset = imageSetWidth - window.innerWidth;
+const handleOnUp = () => {
+    track.dataset.mouseDownAt = "0";
+    track.dataset.prevPercentage = track.dataset.percentage;
+}
 
-    // Clamp offset between 0 and maxOffset
-    const clampedOffset = Math.min(Math.max(offset, 0), maxOffset);
+const handleOnMove = e => {
+    if (track.dataset.mouseDownAt === "0") return;
 
-    // Apply translation based on clamped offset
-    const newPosition = -clampedOffset * window.innerWidth + 'px';
-    imageSet.style.transform = `translateX(${newPosition})`;
-});
+    const mouseDelta = parseFloat(track.dataset.mouseDownAt) - e.clientX,
+        maxDelta = window.innerWidth / 2;
 
-const images = document.querySelectorAll('.images');
-const popUpBox = document.querySelector('.popup-box');
+    const percentage = (mouseDelta / maxDelta) * -100,
+        nextPercentageUnconstrained = parseFloat(track.dataset.prevPercentage) + percentage,
+        nextPercentage = Math.max(Math.min(nextPercentageUnconstrained, 0), -100);
 
+    track.dataset.percentage = nextPercentage;
 
-// for (i = 0; i < images.length; i++) {
-//     images[i].addEventListener('click', console.log('hello'))
-// };
+    track.animate({
+        transform: `translate(${nextPercentage}%, -50%)`
+    }, { duration: 1200, fill: "forwards" });
+
+    for (const image of track.getElementsByClassName("image")) {
+        image.animate({
+            objectPosition: `${100 + nextPercentage}% center`
+        }, { duration: 1200, fill: "forwards" });
+    }
+}
+
+/* -- Had to add extra lines for touch events -- */
+
+window.onmousedown = e => handleOnDown(e);
+
+window.ontouchstart = e => handleOnDown(e.touches[0]);
+
+window.onmouseup = e => handleOnUp(e);
+
+window.ontouchend = e => handleOnUp(e.touches[0]);
+
+window.onmousemove = e => handleOnMove(e);
+
+window.ontouchmove = e => handleOnMove(e.touches[0]);
